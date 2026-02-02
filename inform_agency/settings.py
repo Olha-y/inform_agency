@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "tracking_system",
+    "django.contrib.admin",
 ]
 
 MIDDLEWARE = [
