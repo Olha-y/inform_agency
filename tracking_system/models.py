@@ -40,5 +40,8 @@ class Newspaper(models.Model):
         related_name="newspapers"
     )
 
+    class Meta:
+        ordering = ("published_date", "topic__name")
+
     def __str__(self):
         return f"{self.title}, published data: ({self.published_date})"
