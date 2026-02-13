@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>About Us | NTS</title>
+{% endblock %}
+
+{% block header %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">About Us </h1>
+            <p class="lead text-white mt-3">Who <br /> WE <br /> Are</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+{% block content %}
+  <div class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 ms-auto">
+            <h4 class="mb-1">N T S</h4>
+            <p class="lead mb-0" style="text-align: justify">Our newspaper is more than a source of news — it is a platform built on trust, accuracy, and responsibility. We are committed to delivering timely, reliable, and well-balanced coverage of local and global events.
+            Our team of dedicated journalists follows the highest standards of professionalism and ethics. We aim not only to inform our readers, but also to help them understand the world around them, encourage open dialogue, and promote critical thinking.
+            We believe that quality journalism plays a vital role in shaping an informed and engaged society, and this belief guides everything we do.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+  <section class="py-7">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mx-auto text-center">
+            <h2 class="mb-0">Trusted by over</h2>
+            <h2 class="text-gradient text-primary mb-3">1,679,477+ readers</h2>
+            <p class="lead">Many Fortune 500 companies, startups, universities and governmental institutions love read our news. </p>
+          </div>
+        </div>
+         <div class="row">
+                <div class="col-lg-2 col-md-4 col-6 ms-auto">
+                  <img class="w-100 opacity-6" src="{{ ASSETS_ROOT }}/img/logos/gray-logos/logo-apple.svg" alt="Logo">
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                  <img class="w-100 opacity-6" src="{{ ASSETS_ROOT }}/img/logos/gray-logos/logo-facebook.svg" alt="Logo">
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                  <img class="w-100 opacity-6" src="{{ ASSETS_ROOT }}/img/logos/gray-logos/logo-nasa.svg" alt="Logo">
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 ms-lg-0 ms-md-auto">
+                  <img class="w-100 opacity-6" src="{{ ASSETS_ROOT }}/img/logos/gray-logos/logo-vodafone.svg" alt="Logo">
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 me-md-auto mx-md-0 mx-auto">
+                  <img class="w-100 opacity-6" src="{{ ASSETS_ROOT }}/img/logos/gray-logos/logo-digitalocean.svg" alt="Logo">
+                </div>
+          </div>
+        <hr>
+      </div>
+  </section>
+{% endblock %}

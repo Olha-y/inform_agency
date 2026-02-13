@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+  <title>Newspaper About | NTS</title>
+{% endblock %}
+
+{% block header %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">{{ newspaper.title }} </h1>
+            <p class="lead text-white mt-3">{{ newspaper.topic.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4>Topic: {{ newspaper.topic.name }}
+      <a style="position: absolute; right: 100px;" class="btn btn-primary" href="{% url "tracking_system:newspaper-update" pk=newspaper.id %}">
+        update title and content
+      </a>
+    </h4>
+  </div>
+  <hr>
+  <div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <strong>Publisher{{ newspaper.publishers.count|pluralize }}:</strong>
+        <ul>
+          {% if user in newspaper.publishers.all %}
+            <a class="btn btn-danger" style="position: absolute; right: 100px" href="{% url "tracking_system:redactor-remove" pk=newspaper.id %}">
+              Delete me from this newspaper
+            </a>
+          {% else %}
+            <a class="btn btn-success" style="position: absolute; right: 100px" href="{% url "tracking_system:redactor-assign" pk=newspaper.id %}">
+              Assign me to this newspaper
+            </a>
+          {% endif %}
+          {% for publisher in newspaper.publishers.all %}
+            <li>{{ publisher.first_name }} {{ publisher.last_name }}</li>
+          {% endfor %}
+        </ul>
+    </div>
+  </div>
+    <hr>
+    <strong>{{ newspaper.title }}</strong>
+    <p>{{ newspaper.content }}</p>
+    <strong>Date: </strong> {{ newspaper.published_date|date:"d F, Y \\t\\i\\m\\e: H:i:s" }}
+    <hr>
+    <a class="btn btn-danger link-to-left" href="{% url "tracking_system:newspaper-delete" pk=newspaper.id %}">
+        Delete newspaper
+    </a>
+</div>
+{% endblock %}

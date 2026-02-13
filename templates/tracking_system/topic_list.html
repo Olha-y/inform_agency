@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+  <title>Topics | NTS</title>
+{% endblock %}
+
+{% block header %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Areas of Coverage</h1>
+            <p class="lead text-white mt-3"> Art <br> Business <br> Crime <br> Politics <br> Trade <br> Weather </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Topic list</h1>
+  </div>
+  {% if topics %}
+    <div class="card shadow-sm">
+     <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="bg-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Publications</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+          <tr>
+            <td>
+              {{ topic.id }}
+            </td>
+            <td>
+            <a href="{% url "tracking_system:topic-detail" pk=topic.id %}">
+              {{ topic.name }}
+            </a>
+            </td>
+            <td>{{ topic.publications_count }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+     </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

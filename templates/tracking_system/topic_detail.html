@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+  <title>{{ topic.name }} | NTS</title>
+{% endblock %}
+
+{% block header %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5"><strong>{{ topic.name}}</strong></h1>
+            <p class="lead text-white mt-3"> news </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>{{ topic.name }} list:</h3>
+  </div>
+{% if topic.newspapers.exists %}
+  <div class="card shadow-sm">
+     <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="bg-dark">
+          <tr>
+            <th>Title</th>
+            <th>Publishers</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for newspaper in topic.newspapers.all %}
+          <tr>
+            <td>
+              <a href="{% url "tracking_system:newspaper-detail" pk=newspaper.id %}">
+                {{ newspaper.title | truncatechars:100}}
+              </a>
+            </td>
+            <td>
+              {% for publisher in newspaper.publishers.all %}
+                {{ publisher.first_name }} {{ publisher.last_name }}{% if not forloop.last %}, {% endif %}
+              {% empty %}
+                <span class="text-muted">no publishers</span>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<p>No newspapers for this topic</p>
+{% endif %}
+</div>
+{% endblock %}
