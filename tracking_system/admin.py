@@ -37,5 +37,3 @@ class NewspaperAdmin(admin.ModelAdmin):
 
 admin.site.site_header = "Tracking System"
 admin.site.register(Topic)
-
-
