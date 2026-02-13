@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+  <title>Newspapers | NTS</title>
+{% endblock %}
+
+{% block header %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Newspapers </h1>
+            <p class="lead text-white mt-3">Who <br />What  <br />Where</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+
+{% block content %}
+  <div class="container my-5 pt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Newspaper list</h1>
+    <a href="{% url 'tracking_system:newspaper-create' %}" class="btn btn-primary">
+        Create newspaper
+    </a>
+  </div>
+
+  <form method="get" action="" class="mb-4">
+    <div class="d-flex gap-2 align-items-end">
+    {{ search_form|crispy }}
+    <button type="submit" class="btn btn-secondary mb-3">🔎</button>
+    </div>
+  </form>
+
+ {% if newspapers %}
+   <div class="card shadow-sm">
+      <div class="table-responsive-lg">
+        <table class="table table-hover mb-0 align-middle">
+          <thead class="bg-dark">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Published date</th>
+              <th>Topic</th>
+              <th>Publishers</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for newspaper in newspapers %}
+            <tr>
+              <td>
+                <a href="{% url "tracking_system:newspaper-detail" pk=newspaper.id %} ">{{ newspaper.id }}
+                </a>
+              </td>
+              <td class="text-wrap" style="max-width: 250px;">
+                {{ newspaper.title | truncatechars:100 }}
+              </td>
+              <td>{{ newspaper.content|truncatechars:50 }}</td>
+              <td>{{ newspaper.published_date }}</td>
+              <td>{{ newspaper.topic }}</td>
+              <td>{{ newspaper.publishers.count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+   </div>
+ {% else %}
+   <p>There are no newspapers</p>
+ {% endif %}
+  <br>
+<p>Choose newspaper ID for more information</p>
+</div>
+{% endblock %}

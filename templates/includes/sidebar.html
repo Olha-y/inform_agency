@@ -1,0 +1,54 @@
+<ul class="sidebar-nav">
+
+  {% if user.is_authenticated %}
+
+    <li class="sidebar-section">Account</li>
+    <li>
+      <a href="{% url 'tracking_system:redactor-detail' user.id %}">
+        {{ user.username }}
+      </a>
+    </li>
+    <li>
+      <form id="logout-form" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link p-0">
+          Logout
+        </button>
+      </form>
+    </li>
+
+    <li class="sidebar-section mt-3">Overview</li>
+    <li>
+      <a href="{% url 'tracking_system:index' %}">
+        Dashboard
+      </a>
+    </li>
+
+    <li class="sidebar-section mt-3">Content</li>
+    <li>
+      <a href="{% url 'tracking_system:newspaper-list' %}">
+        Newspapers
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'tracking_system:topic-list' %}">
+        Topics
+      </a>
+    </li>
+
+    <li class="sidebar-section mt-3">Editorial</li>
+    <li>
+      <a href="{% url 'tracking_system:redactor-list' %}">
+        Redactors
+      </a>
+    </li>
+
+  {% else %}
+    <li>
+      <a href="{% url 'login' %}?next={{ request.path }}">
+        Login
+      </a>
+    </li>
+  {% endif %}
+
+</ul>
