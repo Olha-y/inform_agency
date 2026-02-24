@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 
-from inform_agency.settings import AUTH_USER_MODEL
 
 
 class Topic(models.Model):
@@ -44,7 +44,7 @@ class Newspaper(models.Model):
         related_name="newspapers"
     )
     publishers = models.ManyToManyField(
-        AUTH_USER_MODEL,
+        settings.AUTH_USER_MODEL,
         related_name="newspapers"
     )
 

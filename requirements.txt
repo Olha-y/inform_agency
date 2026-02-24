@@ -9,6 +9,7 @@ mypy_extensions==1.1.0
 packaging==26.0
 pathspec==1.0.4
 platformdirs==4.5.1
+psycopg2-binary==2.9.11
 python-dotenv==1.2.1
 pytokens==0.4.0
 sqlparse==0.5.5
