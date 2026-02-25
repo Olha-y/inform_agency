@@ -3,7 +3,6 @@ from django.db import models
 from django.conf import settings
 
 
-
 class Topic(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
