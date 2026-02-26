@@ -9,6 +9,10 @@ All authorized users can view and manage information through a unified dashboard
 ## Check it out!
 [Library project deployed to Render] (https://inform-agency-bwg7.onrender.com)
 
+test_user
+login: test_111
+password: test12345
+
 ---
 
 ## Technology Stack
