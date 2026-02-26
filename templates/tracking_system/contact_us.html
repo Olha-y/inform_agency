@@ -27,12 +27,13 @@
                   or contact using our contact form.
                 </p>
                 <form id="contact-form" method="post" autocomplete="off">
+                  {% csrf_token %}
                   <div class="card-body p-0 my-3">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group input-group-static mb-4">
                           <label>Full Name</label>
-                          <input type="email" class="form-control" placeholder="Full Name">
+                          <input type="text" class="form-control" placeholder="Full Name">
                         </div>
                       </div>
                       <div class="col-md-6 ps-md-2">
