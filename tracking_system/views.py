@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 from django.http import HttpRequest
 from django.shortcuts import (
@@ -187,7 +187,7 @@ class RedactorExperienceUpdateView(
 
 
 class RedactorAssignToNewspaperView(LoginRequiredMixin, View):
-    def get(self, request, pk):
+    def post(self, request, pk):
         newspaper = get_object_or_404(Newspaper, pk=pk)
         newspaper.publishers.add(request.user)
         return redirect(
@@ -197,7 +197,7 @@ class RedactorAssignToNewspaperView(LoginRequiredMixin, View):
 
 
 class RedactorRemoveFromNewspaperView(LoginRequiredMixin, View):
-    def get(self, request, pk):
+    def post(self, request, pk):
         newspaper = get_object_or_404(Newspaper, pk=pk)
         newspaper.publishers.remove(request.user)
         return redirect(
@@ -263,10 +263,23 @@ class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("tracking_system:newspaper-list")
 
 
-class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+class NewspaperUpdateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.UpdateView
+):
     model = Newspaper
     form_class = NewspaperUpdateForm
     template_name = "tracking_system/newspaper_update.html"
+
+    def test_func(self):
+        newspaper = self.get_object()
+        return (
+                self.request.user.is_superuser
+                or newspaper.publishers.filter(
+            pk=self.request.user.pk
+        ).exists()
+        )
 
     def get_success_url(self):
         return reverse_lazy(
@@ -275,6 +288,19 @@ class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
         )
 
 
-class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
+class NewspaperDeleteView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.DeleteView
+):
     model = Newspaper
     success_url = reverse_lazy("tracking_system:newspaper-list")
+
+    def test_func(self):
+        newspaper = self.get_object()
+        return (
+                self.request.user.is_superuser
+                or newspaper.publishers.filter(
+            pk=self.request.user.pk
+        ).exists()
+        )

@@ -1,18 +1,44 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Login | NTS</title>
+{% endblock %}
+
 {% block navigation %}{% endblock %}
 
-{% block header %}{% endblock %}
+{% block header %}
+<header class="header-2">
+  <div class="page-header min-vh-50 relative"
+       style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
 
-{% block content %}
-  <h1>Login</h1>
-  {% if form.errors %}
-    <p style="">Invalid credentials</p>
-  {% endif %}
-  <form action="{% url "login" %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-    <input type="hidden" name="next" value="{{ next }}">
-  </form>
+    <span class="mask bg-gradient-primary opacity-4"></span>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto text-center">
+
+          <h1 class="text-white pt-3 mt-n5 mb-4">Log in</h1>
+
+          <div class="card shadow-lg border-0">
+            <div class="card-body p-4">
+
+              {% if form.errors %}
+                <p style="">Invalid credentials</p>
+              {% endif %}
+              <form action="{% url "login" %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+                <input type="hidden" name="next" value="{{ next }}">
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 {% endblock %}
+
+{% block content %}{% endblock %}
