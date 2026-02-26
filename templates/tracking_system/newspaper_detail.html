@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">{{ newspaper.title }} </h1>
+            <h3 class="text-white pt-3 mt-n5">{{ newspaper.title }} </h3>
             <p class="lead text-white mt-3">{{ newspaper.topic.name}}</p>
           </div>
         </div>
@@ -41,12 +41,12 @@
           {% if user in newspaper.publishers.all %}
             <form method="post" action="{% url 'tracking_system:redactor-remove' pk=newspaper.id%}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger" style="position: absolute; right: 100px">Delete me from this newspaper</button>
+            <button type="submit" class="btn btn-danger">Delete me from this newspaper</button>
             </form>
           {% else %}
             <form method="post" action="{% url 'tracking_system:redactor-assign' pk=newspaper.id%}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-success" style="position: absolute; right: 100px">Assign me to this newspaper</button>
+            <button type="submit" class="btn btn-success">Assign me to this newspaper</button>
             </form>
           {% endif %}
           {% for publisher in newspaper.publishers.all %}
